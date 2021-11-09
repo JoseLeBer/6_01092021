@@ -1,6 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const helmet = require("helmet");
 
+// On importe le module "path" qui nous donne accès au chemin de notre système de fichier
+const path = require("path");
+
+const sauceRoutes = require("./routes/sauce");
 const authRoutes = require("./routes/auth");
 
 mongoose
@@ -13,6 +18,7 @@ mongoose
 
 const app = express();
 
+app.use(helmet());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -28,6 +34,13 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+// Pour la route "/images", on utilise le module "path"
+app.use("/images", express.static(path.join(__dirname, "images")));
+
+// Pour la route "/api/sauces", on utilise le routeur "sauceRoutes"
+app.use("/api/sauces", sauceRoutes);
+// Pour la route "/api/auth", on utilise le routeur "authRoutes"
 app.use("/api/auth", authRoutes);
 
+// On exporte notre application pour pouvoir l'utiliser dans d'autres fichiers
 module.exports = app;

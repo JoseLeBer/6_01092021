@@ -1,4 +1,7 @@
+// On importe le package http de Node.js avec la commande "require"
 const http = require("http");
+
+// On importe notre application "app.js"
 const app = require("./app");
 
 const normalizePort = (val) => {
@@ -36,6 +39,7 @@ const errorHandler = (error) => {
   }
 };
 
+// On appelle la méthode createServer qui prend en argument l'application Express
 const server = http.createServer(app);
 
 server.on("error", errorHandler);
