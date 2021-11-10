@@ -1,6 +1,3 @@
-// Création du fichier "sauce.js" où on va déporter toute la logique métier
-
-// On importe le modèle "sauce.js" nécessaire à la logique métier des différents contrôleurs
 const Sauce = require("../models/Sauce");
 
 // On importe le package "fs" pour avoir accès aux différentes opérations lié au système de fichier
@@ -8,18 +5,13 @@ const fs = require("fs");
 
 // CONTROLLER QUI PERMET LA CRÉATION D'UNE SAUCE \\
 exports.createSauce = (req, res, next) => {
-  // On transforme le corps de la requête en objet JavaScript
   const sauceObject = JSON.parse(req.body.sauce);
-  // On crée une nouvelle instance du modèle sauce
   const sauce = new Sauce({
-    // On lui passe un objet qui contient toutes les informations
-    /// On utilise l'opérateur spread pour recopier tous ce que contient la const sauce object
     ...sauceObject,
     // On modifie l'URL de l'image car c'est notre middleware multer qui a généré le fichier
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
-    // On instance les likes, dislikes à 0 et on déclare usersLiked et usersDisliked en tant que tableaux vides
     likes: 0,
     dislikes: 0,
     usersLiked: [" "],

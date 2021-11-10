@@ -4,7 +4,7 @@ const passwordSchema = new passwordValidator();
 
 passwordSchema
   .is()
-  .min(10)
+  .min(8)
   .is()
   .max(50)
   .has()
