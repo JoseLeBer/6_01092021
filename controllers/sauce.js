@@ -14,8 +14,8 @@ exports.createSauce = (req, res, next) => {
     }`,
     likes: 0,
     dislikes: 0,
-    usersLiked: [" "],
-    usersDisliked: [" "],
+    usersLiked: [],
+    usersDisliked: [],
   });
   // On enregistre cette instance dans la BDD avec la méthode save
   sauce

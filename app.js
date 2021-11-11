@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
 
 // On importe le module "path" qui nous donne accès au chemin de notre système de fichier
 const path = require("path");
@@ -20,6 +21,8 @@ mongoose
 const app = express();
 
 app.use(helmet());
+app.use(mongoSanitize());
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

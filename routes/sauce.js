@@ -13,8 +13,8 @@ const sauceCtrl = require("../controllers/sauce");
 // On applique aux routes concernées, le middleware multer
 // On applique aux routes la logique métier des contrôleurs
 router.post("/", auth, multer, sauceCtrl.createSauce);
-router.put("/:id", auth, multer, sauceCtrl.updateSauce);
-router.delete("/:id", auth, sauceCtrl.deleteSauce);
+router.put("/:id", auth, isOwner, multer, sauceCtrl.updateSauce);
+router.delete("/:id", isOwner, auth, sauceCtrl.deleteSauce);
 router.get("/:id", auth, sauceCtrl.getOneSauce);
 router.get("/", auth, sauceCtrl.getAllSauce);
 router.post("/:id/like", auth, sauceCtrl.likeOrDislikeSauce);
