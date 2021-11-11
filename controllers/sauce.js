@@ -38,7 +38,6 @@ exports.updateSauce = (req, res, next) => {
       }
     : // Si req.file n'existe pas
       { ...req.body };
-  console.log(sauceObject);
 
   Sauce.updateOne(
     // Le premier argument c'est l'objet de comparaison

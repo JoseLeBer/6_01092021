@@ -1,13 +1,7 @@
-// Création du fichier "auth.js" où on va déporter toute la logique métier
-
-// On importe le package "bcrypt" qui permet le cryptage des mots de passe
-const bcrypt = require("bcrypt");
-
-// On importe le package "jsonwebtoken" qui permet de créer et vérifier les tokens
-const jwt = require("jsonwebtoken");
-
-// On importe le modèle "user.js" nécessaire à la logique métier des différents contrôleurs
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // CONTROLLER QUI PERMET LA CRÉATION DE NOUVEAU USER DANS LA BDD \\
 exports.signup = (req, res, next) => {
@@ -49,7 +43,7 @@ exports.login = (req, res, next) => {
           res.status(200).json({
             userId: user._id,
             // On utilise la fonction "sign" de jwt
-            token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
+            token: jwt.sign({ userId: user._id }, process.env.SECRET_TOKEN, {
               expiresIn: "24h",
             }),
           });

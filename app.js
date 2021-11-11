@@ -4,15 +4,16 @@ const helmet = require("helmet");
 
 // On importe le module "path" qui nous donne accès au chemin de notre système de fichier
 const path = require("path");
+require("dotenv").config();
 
 const sauceRoutes = require("./routes/sauce");
 const authRoutes = require("./routes/auth");
 
 mongoose
-  .connect(
-    "mongodb+srv://jlb:kikilesinge@cluster0.3gofo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.SECRET_MONGOOSE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
