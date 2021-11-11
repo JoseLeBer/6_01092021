@@ -17,7 +17,6 @@ exports.createSauce = (req, res, next) => {
     usersLiked: [],
     usersDisliked: [],
   });
-  // On enregistre cette instance dans la BDD avec la méthode save
   sauce
     .save()
     .then(() => res.status(201).json({ message: "Sauce enregistrée" }))
@@ -26,7 +25,6 @@ exports.createSauce = (req, res, next) => {
 
 // CONTROLLER QUI PERMET LA MISE À JOUR D'UNE SAUCE \\
 exports.updateSauce = (req, res, next) => {
-  // Si il y a une nouvelle image
   const sauceObject = req.file
     ? // On utilise ? pour savoir si req.file existe
       {
@@ -40,9 +38,7 @@ exports.updateSauce = (req, res, next) => {
       { ...req.body };
 
   Sauce.updateOne(
-    // Le premier argument c'est l'objet de comparaison
     { _id: req.params.id },
-    // Le deuxième c'est le nouvel objet
     { ...sauceObject, _id: req.params.id }
   )
     .then(() => res.status(200).json({ message: "Sauce modifiée" }))
@@ -51,7 +47,6 @@ exports.updateSauce = (req, res, next) => {
 
 // CONTROLLER QUI PERMET LA SUPPRESSION D'UNE SAUCE \\
 exports.deleteSauce = (req, res, next) => {
-  // On va chercher l'objet pour avoir l'URL de l'image, pour avoir son nom, pour pouvoir le supprimer du dossier "images"
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
       // On récupère le nom du fichier

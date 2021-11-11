@@ -9,10 +9,8 @@ module.exports = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
     // On récupère le userId contenu dans le token
     const userId = decodedToken.userId;
-    // Si il y a un userId dans le corps de la requête && qu'il est différent de celui du token
     if (req.body.userId && req.body.userId !== userId) {
       throw "User ID non valable";
-      // Sinon on appelle le prochain middleware (dans le fichier dossier "routes" - fichier "sauces.js")
     } else {
       next();
     }
