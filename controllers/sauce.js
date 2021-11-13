@@ -1,5 +1,4 @@
 const Sauce = require("../models/Sauce");
-
 // On importe le package "fs" pour avoir accès aux différentes opérations lié au système de fichier
 const fs = require("fs");
 
