@@ -41,10 +41,7 @@ app.use(express.json());
 // Pour la route "/images", on utilise le module "path"
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-// Pour la route "/api/sauces", on utilise le routeur "sauceRoutes"
 app.use("/api/sauces", sauceRoutes);
-// Pour la route "/api/auth", on utilise le routeur "authRoutes"
 app.use("/api/auth", authRoutes);
 
-// On exporte notre application pour pouvoir l'utiliser dans d'autres fichiers
 module.exports = app;

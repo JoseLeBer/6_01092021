@@ -37,6 +37,17 @@ exports.updateSauce = (req, res, next) => {
     : // Si req.file n'existe pas
       { ...req.body };
 
+  if (req.file) {
+    Sauce.findOne({ _id: req.params.id })
+      .then((sauce) => {
+        // On récupère le nom du fichier
+        const filename = sauce.imageUrl.split("/images/")[1];
+        // Avec ce nom de fichier on appelle la fonction "unlink" qui permet de supprimer un fichier
+        fs.unlink(`images/${filename}`, () => {});
+      })
+      .catch((error) => res.status(500).json({ error }));
+  }
+
   Sauce.updateOne(
     { _id: req.params.id },
     { ...sauceObject, _id: req.params.id }
