@@ -34,7 +34,14 @@ exports.updateSauce = (req, res, next) => {
         }`,
       }
     : // Si req.file n'existe pas
-      { ...req.body };
+      {
+        name: req.body.name,
+        manufacturer: req.body.manufacturer,
+        description: req.body.description,
+        mainPepper: req.body.mainPepper,
+        imageUrl: req.body.imageUrl,
+        heat: req.body.heat,
+      };
 
   if (req.file) {
     Sauce.findOne({ _id: req.params.id })
